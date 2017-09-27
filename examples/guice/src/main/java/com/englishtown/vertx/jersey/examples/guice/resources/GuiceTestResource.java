@@ -1,13 +1,11 @@
 package com.englishtown.vertx.jersey.examples.guice.resources;
 
 import com.englishtown.vertx.jersey.examples.guice.MyDependency;
+import com.englishtown.vertx.jersey.examples.guice.ITest;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import javax.ws.rs.GET;
-import javax.ws.rs.InternalServerErrorException;
-import javax.ws.rs.Path;
-import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.*;
 import javax.ws.rs.container.AsyncResponse;
 import javax.ws.rs.container.Suspended;
 
@@ -23,6 +21,11 @@ public class GuiceTestResource {
     @Inject
     public GuiceTestResource(MyDependency myDependency) {
         this.myDependency = myDependency;
+    }
+
+    @POST
+    public String doPost(ITest test) {
+        return test.get();
     }
 
     @GET

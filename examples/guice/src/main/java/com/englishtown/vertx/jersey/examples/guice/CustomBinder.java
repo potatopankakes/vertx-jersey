@@ -8,6 +8,7 @@ import com.englishtown.vertx.jersey.inject.VertxRequestProcessor;
 import com.englishtown.vertx.jersey.inject.VertxResponseProcessor;
 import com.google.inject.AbstractModule;
 import com.google.inject.multibindings.Multibinder;
+import com.google.inject.name.Names;
 
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.container.ContainerResponseFilter;
@@ -24,6 +25,9 @@ public class CustomBinder extends AbstractModule {
     protected void configure() {
 
         install(new GuiceJerseyBinder());
+
+        bind(String.class).annotatedWith(Names.named("MyString"))
+            .toInstance("With constructor injection");
 
         // POJOs
         bind(MyDependency.class).to(DefaultMyDependency.class);

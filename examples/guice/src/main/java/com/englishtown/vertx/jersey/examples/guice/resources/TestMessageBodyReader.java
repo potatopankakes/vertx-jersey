@@ -2,6 +2,7 @@ package com.englishtown.vertx.jersey.examples.guice.resources;
 
 import com.englishtown.vertx.jersey.examples.guice.ITest;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
@@ -18,12 +19,13 @@ public class TestMessageBodyReader
     implements MessageBodyReader<ITest> {
   private String t;
 
+  @Inject
   public TestMessageBodyReader(
-      //@Named("MyString") String s
+      @Named("MyString") String s
   ) {
     System.out.println("TestMessageBodyReader - constructor");
     t = "Without constructor injection";
-    //t = s;
+    t = s;
   }
 
   @Override

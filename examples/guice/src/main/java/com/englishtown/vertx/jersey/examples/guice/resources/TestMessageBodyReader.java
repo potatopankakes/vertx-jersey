@@ -1,6 +1,7 @@
 package com.englishtown.vertx.jersey.examples.guice.resources;
 
 import com.englishtown.vertx.jersey.examples.guice.ITest;
+import io.vertx.core.Vertx;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -21,11 +22,17 @@ public class TestMessageBodyReader
 
   @Inject
   public TestMessageBodyReader(
-      @Named("MyString") String s
+      @Named("MyString") String s,
+      Vertx v
   ) {
     System.out.println("TestMessageBodyReader - constructor");
     t = "Without constructor injection";
     t = s;
+    if ( v != null ) {
+      System.out.println("TestMessageBodyReader - Vertx was injected!!!!: " +
+                         v.getClass().getCanonicalName()
+      );
+    }
   }
 
   @Override

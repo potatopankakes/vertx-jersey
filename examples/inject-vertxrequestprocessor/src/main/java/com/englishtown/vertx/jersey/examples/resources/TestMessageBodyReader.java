@@ -1,7 +1,9 @@
 package com.englishtown.vertx.jersey.examples.resources;
 
 import com.englishtown.vertx.jersey.examples.ITest;
+import io.vertx.core.Vertx;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
@@ -18,12 +20,19 @@ public class TestMessageBodyReader
     implements MessageBodyReader<ITest> {
   private String t;
 
+  @Inject
   public TestMessageBodyReader(
-      @Named("MyString") String s
+      @Named("MyString") String s,
+      Vertx v
   ) {
     System.out.println("TestMessageBodyReader - constructor");
     t = "Without constructor injection";
     t = s;
+    if ( v != null ) {
+      System.out.println("TestMessageBodyReader - Vertx was injected!!!!: " +
+                         v.getClass().getCanonicalName()
+      );
+    }
   }
 
   @Override

@@ -8,6 +8,8 @@ import org.glassfish.hk2.utilities.binding.AbstractBinder;
 public class ExampleBinder extends AbstractBinder {
     @Override
     protected void configure() {
+        bind("Using constructor injection").to(String.class).named("MyString");
+
         // Request processors
         bind(ExampleVertxRequestProcessor.class).to(VertxRequestProcessor.class);
         bind(OtherVertxRequestProcessor.class).to(VertxRequestProcessor.class);
